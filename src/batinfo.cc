@@ -3,8 +3,6 @@
 #include <iostream>
 #include <fstream>
 
-#include <string>
-
 #include <filesystem>
 namespace fs = std::filesystem;
 
@@ -39,4 +37,15 @@ Batinfo::Batinfo(uint16_t bat_num) {
   energy_now_stream.close();
 
   energy_now = std::stoi(energy_now_string);
+
+
+  // retrieve status
+  auto status_file = bat_path / "status";
+
+  std::ifstream status_stream (status_file);
+  std::string status_string;
+  if (status_stream.is_open()) {
+    std::getline(status_stream, status);
+  }
+  status_stream.close();
 }
