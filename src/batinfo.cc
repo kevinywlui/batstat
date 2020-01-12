@@ -26,7 +26,7 @@ Batinfo::Batinfo(uint16_t bat_num) {
 
   energy_full = std::stoi(energy_full_string);
 
-  // retrieve energy_full data
+  // retrieve energy_now data
   auto energy_now_file = bat_path / "energy_now";
 
   std::ifstream energy_now_stream (energy_now_file);
@@ -38,6 +38,17 @@ Batinfo::Batinfo(uint16_t bat_num) {
 
   energy_now = std::stoi(energy_now_string);
 
+  // retrieve power_now data
+  auto power_now_file = bat_path / "power_now";
+
+  std::ifstream power_now_stream (power_now_file);
+  std::string power_now_string;
+  if (power_now_stream.is_open()) {
+    std::getline(power_now_stream, power_now_string);
+  }
+  power_now_stream.close();
+
+  power_now = std::stoi(power_now_string);
 
   // retrieve status
   auto status_file = bat_path / "status";

@@ -10,6 +10,7 @@ class Batinfo {
 
     uint32_t energy_full;
     uint32_t energy_now;
+    uint32_t power_now;
 
     std::string status;
 
