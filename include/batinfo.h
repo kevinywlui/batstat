@@ -15,5 +15,9 @@ class Batinfo {
     std::string status;
 
   private:
-    int bat_num;
+    // Read information from `/sys/class/power_supply/BAT{bat_num}`
+    uint16_t bat_num;
+
+    // Return the string obtained by reading `/../../BAT{bat_num}/{data_name}`
+    std::string get_data(std::string);
 };
