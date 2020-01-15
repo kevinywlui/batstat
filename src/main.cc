@@ -11,9 +11,7 @@
 #include <filesystem>
 namespace fs = std::filesystem;
 
-int main() {
-
-  // determine number of batteries
+uint16_t get_num_batteries() {
   uint16_t num_batteries = 1;
   fs::path power_supply_path = "/sys/class/power_supply";
   auto bat_path = power_supply_path / ("BAT" + std::to_string(num_batteries));
@@ -21,6 +19,12 @@ int main() {
     num_batteries++;
     bat_path = power_supply_path / ("BAT" + std::to_string(num_batteries));
   }
+  return num_batteries;
+}
+
+int main() {
+
+  auto num_batteries = get_num_batteries();
 
   // store all bat info in a vector
   std::vector<Batinfo> bat_vec;
@@ -43,11 +47,11 @@ int main() {
   bool is_charging = false;
   bool is_discharging = false;
   for (auto bat: bat_vec) {
-    if (bat.status == "Charging") {
+    if (bat.is_charging) {
       is_charging = true;
       break;
     }
-    else if (bat.status == "Discharging") {
+    else if (bat.is_discharging) {
       is_discharging = true;
       break;
     }

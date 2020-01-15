@@ -13,6 +13,9 @@ class Batinfo {
     uint32_t power_now;
 
     std::string status;
+    bool is_charging;
+    bool is_discharging;
+    bool is_full;
 
   private:
     // Read information from `/sys/class/power_supply/BAT{bat_num}`

@@ -15,6 +15,9 @@ Batinfo::Batinfo(uint16_t bat_num) {
   power_now = std::stoi(get_data("power_now"));
 
   status = get_data("status");
+  is_charging = (status == "Charging");
+  is_discharging = (status == "Discharging");
+  is_full = (status == "Full");
 }
 
 std::string Batinfo::get_data(std::string data_name) {
