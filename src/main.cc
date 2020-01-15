@@ -3,16 +3,15 @@
 #include <cxxopts.hpp>
 #include <fmt/format.h>
 
-int main() {
+int main(int argc, char* argv[]) {
+  // Form strings to be printed
   Totalinfo totalinfo;
 
   float percentage = totalinfo.energy_frac*100;
   std::string status_abbr = totalinfo.status_abbr;
 
+  std::string batstat = fmt::format("{:.0f}% {} {}", percentage, status_abbr, totalinfo.time_string);
 
-  fmt::print("{:.0f}% {} {}\n", percentage, status_abbr, totalinfo.time_string);
-  fmt::print("{:.0f}% {} {}\n", percentage, status_abbr, totalinfo.time_string);
-  
   std::string color_code;
   if (percentage < 20)
     color_code = "#A93226";
@@ -22,5 +21,40 @@ int main() {
     color_code = "#F1C40F";
   else
     color_code = "#239B56";
-  fmt::print("{}\n", color_code);
+
+  try {
+    cxxopts::Options options("batstat", "Battery statistics tool support multiple batteries");
+    options.add_options()
+      ("h,help", "Display help")
+      ("p,percentage", "Return only percentage")
+      ("i3block", "Enable i3block colors")
+      ;
+    auto result = options.parse(argc, argv);
+
+    if (result.count("help")) {
+      std::cout << options.help() << std::endl;
+      return 0;
+    }
+
+
+    // percentage print mode
+    if (result.count("percentage")) {
+      std::cout << percentage << std::endl;
+      return 0;
+    }
+
+    // i3block print mode
+    if (result.count("i3block")) {
+      fmt::print("{0}\n{0}\n{1}\n", batstat, color_code);
+      return 0;
+    }
+    
+    std::cout << batstat << std::endl;
+    return 0;
+  }  
+  catch (const cxxopts::OptionException& e)
+  {
+    std::cout << "error parsing options: " << e.what() << std::endl;
+    return 1;
+  }
 }
