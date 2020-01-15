@@ -1,28 +1,14 @@
 cmake_minimum_required(VERSION 3.16)
 set(CMAKE_CXX_STANDARD 17)
 
-project(batstat
-    LANGUAGES CXX
-    )
+project(batstat LANGUAGES CXX)
 
-add_library(batinfo
-    include/batinfo.h
-    src/batinfo.cc
-    )
+add_library(batinfo include/batinfo.h src/batinfo.cc)
+add_library(totalinfo include/totalinfo.h src/totalinfo.cc)
 
-target_include_directories(
-    batinfo
-    PUBLIC
-    "include"
-    )
+target_include_directories(batinfo PUBLIC "include")
+target_include_directories(totalinfo PUBLIC "include")
 
-# add_library(cxxopts
-#     INTERFACE
-#     )
-# target_include_directories(cxxopts
-#     INTERFACE
-#     "extern/cxxopts/include"
-#     )
 include(FetchContent)
 FetchContent_Declare(
   cxxopts
@@ -34,4 +20,4 @@ FetchContent_MakeAvailable(cxxopts)
 add_executable(batstat src/main.cc)
 
 
-target_link_libraries(${PROJECT_NAME} batinfo cxxopts)
+target_link_libraries(${PROJECT_NAME} batinfo totalinfo cxxopts)
