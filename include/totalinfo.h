@@ -24,4 +24,5 @@ class Totalinfo {
     std::string status_abbr;
 
     float hours_until_comp;
+    std::string time_string;
 };

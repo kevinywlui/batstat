@@ -1,6 +1,8 @@
 #include "batinfo.h"
 #include "totalinfo.h"
 
+#include <fmt/format.h>
+#include <cmath>
 #include <vector>
 
 #include <filesystem>
@@ -74,5 +76,19 @@ Totalinfo::Totalinfo() {
   }
   else {
     hours_until_comp = energy_now / float(power_now);
+  }
+
+  if (hours_until_comp < 0) {
+    time_string = "";
+  }
+  else {
+    uint32_t hours = std::floor(hours_until_comp);
+    if (hours > 99) {
+      time_string = "Inf";
+    }
+    else {
+      uint32_t minutes = std::floor((hours_until_comp-hours)*60);
+      time_string = fmt::format("({:0>2}:{:0>2})", hours, minutes);
+    }
   }
 }
