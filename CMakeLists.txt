@@ -16,17 +16,22 @@ target_include_directories(
     "include"
     )
 
-add_library(cxxopts
-    INTERFACE
-    )
-target_include_directories(cxxopts
-    INTERFACE
-    "extern/cxxopts/include"
-    )
+# add_library(cxxopts
+#     INTERFACE
+#     )
+# target_include_directories(cxxopts
+#     INTERFACE
+#     "extern/cxxopts/include"
+#     )
+include(FetchContent)
+FetchContent_Declare(
+  cxxopts
+  GIT_REPOSITORY https://github.com/jarro2783/cxxopts.git
+  GIT_TAG        v2.2.0
+)
+FetchContent_MakeAvailable(cxxopts)
 
-add_executable(batstat
-    src/main.cc
-    )
+add_executable(batstat src/main.cc)
 
 
 target_link_libraries(${PROJECT_NAME} batinfo cxxopts)
