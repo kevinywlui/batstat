@@ -1,4 +1,5 @@
 #include <batinfo.h>
+#include <cxxopts.hpp>
 
 #include <iostream>
 #include <iomanip>

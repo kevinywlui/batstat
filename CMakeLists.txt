@@ -16,8 +16,17 @@ target_include_directories(
     "include"
     )
 
+add_library(cxxopts
+    INTERFACE
+    )
+target_include_directories(cxxopts
+    INTERFACE
+    "extern/cxxopts/include"
+    )
+
 add_executable(batstat
     src/main.cc
     )
 
-target_link_libraries(batstat batinfo)
+
+target_link_libraries(${PROJECT_NAME} batinfo cxxopts)
