@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     options.add_options()
       ("h,help", "Display help")
       ("p,percentage", "Return only percentage")
-      ("i3block", "Enable i3block colors")
+      ("i3blocks", "Enable i3blocks colors")
       ;
     auto result = options.parse(argc, argv);
 
@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
     }
 
     // i3block print mode
-    if (result.count("i3block")) {
+    if (result.count("i3blocks")) {
       fmt::print("{0}\n{0}\n{1}\n", batstat, color_code);
       return 0;
     }
