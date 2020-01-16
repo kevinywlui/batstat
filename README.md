@@ -3,7 +3,18 @@
 Battery statistics tool supporting multiple batteries
 
 This tool was created to help me display battery information on my Thinkpad
-T480 which has 2 batteries. It was only been tested on a Thinkpad T480.
+T480 which has 2 batteries. It has only been tested on my Thinkpad T480.
+
+## Build
+
+I use `cmake` and `ninja` to build `batstat`. The output binary will be in the
+`build` directory.
+```
+mkdir build
+cd build
+cmake -GNinja ..
+ninja
+```
 
 ## Usage
 
