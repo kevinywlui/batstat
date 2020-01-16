@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
     color_code = "#239B56";
 
   try {
-    cxxopts::Options options("batstat", "Battery statistics tool support multiple batteries");
+    cxxopts::Options options("batstat", "Battery statistics tool supporting multiple batteries");
     options.add_options()
       ("h,help", "Display help")
       ("p,percentage", "Return only percentage")
