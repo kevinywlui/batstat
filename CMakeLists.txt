@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 set(CMAKE_CXX_STANDARD 17)
 
-project(batstat LANGUAGES CXX)
+project(batteries_stats LANGUAGES CXX)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
 include(FetchContent)
@@ -25,5 +25,5 @@ target_include_directories(totalinfo PUBLIC "include")
 target_link_libraries(totalinfo fmt batinfo)
 
 
-add_executable(batstat src/main.cc)
+add_executable(${PROJECT_NAME} src/main.cc)
 target_link_libraries(${PROJECT_NAME} totalinfo cxxopts fmt)
