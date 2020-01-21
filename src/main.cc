@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
   if (percentage < 20)
     color_code = "#A93226";
   else if (percentage < 40)
-    color_code = "#BA4A00";
+    color_code = "#F5B041";
   else if (percentage < 80)
     color_code = "#F1C40F";
   else
